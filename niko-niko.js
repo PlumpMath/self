@@ -7,11 +7,16 @@ var colorScale = d3.scale.ordinal()
 	.domain(range(0, 9))
 	.range(colorbrewer.YlGn[9]);
 
-stage.selectAll("rect").data(dailyHappiness)
-	.enter().append("rect")
+var makeDaySquare = function(sel) {
+	sel
 	.attr("width", cellSize + "px")
 	.attr("height", cellSize + "px")
 	.attr("x", function(_, i) { return i % 7 * cellSize; })
 	.attr("y", function(_, i) { return Math.floor(i / 7) * cellSize; })
 	.attr("stroke", "#000").attr("stroke-width", "0.1px")
 	.attr("fill", function(d) { return colorScale(d); });
+}
+
+stage.selectAll("rect").data(dailyHappiness)
+	.enter().append("rect")
+	.call(makeDaySquare);
