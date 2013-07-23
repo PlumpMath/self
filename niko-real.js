@@ -1,4 +1,4 @@
-var activityUrl = "https://gist.github.com/heyLu/66f596be0c7b518e4ebd/raw/0f9b215e6c1b7c9e79522e4b9ec5f9ba62469345/%5B"
+var activityUrl = "./sample.json";
 
 var stage = d3.select("#happiness");
 
