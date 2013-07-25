@@ -13,6 +13,7 @@ var colorScale = d3.scale.ordinal()
 stage.on("mouseover", function() {
 	d3.select("#description").text(d3.event.target.__data__.comment);
 });
+stage.on("mouseout", function() { d3.select("#description").text(""); });
 
 var makeDaySquare = function(sel) {
 	sel
