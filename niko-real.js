@@ -1,4 +1,4 @@
-var activityUrl = "./sample.json";
+var activityUrl = "http://papill0n.org/happiness.json";
 
 var stage = d3.select("#happiness");
 
