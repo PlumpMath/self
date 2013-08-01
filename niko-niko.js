@@ -13,7 +13,8 @@ var colorScale = d3.scale.ordinal()
 	.range(colorbrewer.YlGn[9]);
 
 stage.on("mouseover", function() {
-	d3.select("#description").text(d3.event.target.__data__.comment);
+	var happiness = d3.event.target.__data__;
+	d3.select("#description").text(happiness.comment + " (" + happiness.date + ")");
 });
 stage.on("mouseout", function() { d3.select("#description").text(""); });
 
