@@ -13,7 +13,8 @@ var colorScale = d3.scale.ordinal()
 	.range(colorbrewer.YlGn[9]);
 
 stage.on("mouseover", function() {
-	d3.select("#description").text(d3.event.target.__data__.comment);
+	var happiness = d3.event.target.__data__;
+	d3.select("#description").text(happiness.comment + " (" + happiness.date + ")");
 });
 stage.on("mouseout", function() { d3.select("#description").text(""); });
 
@@ -21,7 +22,7 @@ var makeDaySquare = function(sel) {
 	sel
 	.attr("width", cellSize + "px")
 	.attr("height", cellSize + "px")
-	.attr("x", function(d) { return d.date.getDay() * cellSize; })
+	.attr("x", function(d) { return new Date(d.date).getDay() * cellSize; })
 	.attr("y", function(d) { return Math.floor((toDays(d.date) - startDay) / 7) * cellSize; })
 	.attr("stroke", "#000").attr("stroke-width", "0.1px")
 	.attr("fill", function(d) { return colorScale(d.mood); });
