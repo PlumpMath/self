@@ -22,7 +22,7 @@ var makeDaySquare = function(sel) {
 	sel
 	.attr("width", cellSize + "px")
 	.attr("height", cellSize + "px")
-	.attr("x", function(d) { return d.date.getDay() * cellSize; })
+	.attr("x", function(d) { return new Date(d.date).getDay() * cellSize; })
 	.attr("y", function(d) { return Math.floor((toDays(d.date) - startDay) / 7) * cellSize; })
 	.attr("stroke", "#000").attr("stroke-width", "0.1px")
 	.attr("fill", function(d) { return colorScale(d.mood); });
