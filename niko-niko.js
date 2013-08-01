@@ -1,6 +1,8 @@
+var dailyHappinessStart = 15000;
 var dailyHappiness = range(0, 100).map(function(_) {
 	return {mood: Math.floor(Math.random() * 9),
-	        comment: String.fromCharCode(Math.random() * 1000)};
+	        comment: String.fromCharCode(Math.random() * 1000),
+	        date: new Date((dailyHappinessStart += (Math.random() * 5)) * 24 * 60 * 60 * 1000)};
 });
 
 var stage = d3.select("#happiness");
@@ -19,12 +21,16 @@ var makeDaySquare = function(sel) {
 	sel
 	.attr("width", cellSize + "px")
 	.attr("height", cellSize + "px")
-	.attr("x", function(_, i) { return i % 7 * cellSize; })
-	.attr("y", function(_, i) { return Math.floor(i / 7) * cellSize; })
+	.attr("x", function(d) { return d.date.getDay() * cellSize; })
+	.attr("y", function(d) { return Math.floor((toDays(d.date) - startDay) / 7) * cellSize; })
 	.attr("stroke", "#000").attr("stroke-width", "0.1px")
 	.attr("fill", function(d) { return colorScale(d.mood); });
 }
 
+var truncate = function(num) { return parseInt(num); };
+var toDays = function(date) { return truncate(new Date(date).valueOf() / 1000 / 60 / 60 / 24); };
+var toDate = function(days) { return new Date(days * 24 * 60 * 60 * 1000); };
+var startDay = toDays(dailyHappiness[0].date);
 stage.selectAll("rect").data(dailyHappiness)
 	.enter().append("rect")
 	.call(makeDaySquare);
